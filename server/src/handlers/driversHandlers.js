@@ -14,7 +14,7 @@ const { getAllDrivers, getDetailDriver, getNameDriver, postDriver } = require(".
     }
 } */
 
-const getNameHandler = async (req, res) => {
+/* const getNameHandler = async (req, res) => {
     const { name } = req.query
     const nameDriver = await getNameDriver(name)
     try {
@@ -23,6 +23,17 @@ const getNameHandler = async (req, res) => {
     } catch (error) {
         return res.status(500).send(error)
     }
+} */
+
+const getDriversHandler = async (req, res) => {
+    try {
+        const drivers = getAllDrivers()
+        return res.status(200).json(drivers)
+    } catch (error) {
+        return res.status(500).send(error)
+    }
 }
 
-module.exports = { getDriversHandler, getNameHandler }
+
+
+module.exports = { getDriversHandler }
