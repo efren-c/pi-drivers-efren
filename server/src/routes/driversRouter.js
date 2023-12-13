@@ -3,7 +3,7 @@ const { getDriversHandler, getDetailHandler, getNameHandler, postDriverHandler }
 
 const driversRouter = Router()
 
-driversRouter.get('/', getNameHandler)
+driversRouter.get("/", getNameHandler, getDriversHandler)
 driversRouter.get('/:id', getDetailHandler)
 driversRouter.post('/', postDriverHandler)
 

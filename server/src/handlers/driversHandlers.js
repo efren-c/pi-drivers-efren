@@ -26,7 +26,7 @@ const getNameHandler = async (req, res) => {
     const { name } = req.query
     const nameDriver = await getNameDriver(name)
     try {
-        if (nameDriver.length === 0) return res.status(202).json(await getAllDrivers())
+        if (nameDriver.length === 0) return res.status(400).send('No se encontró el piloto buscado.')
         return res.status(200).json(nameDriver)
     } catch (error) {
         return res.status(500).send(error)
@@ -37,7 +37,7 @@ const postDriverHandler = async (req, res) => {
     const { name, surname, description, image, nationality, dob } = req.body
     const createDriver = await postDriver(name, surname, description, image, nationality, dob)
     try {
-        return res.status(200).json(createDriver)
+        return res.status(200).json(createDriver())
     } catch (error) {
         return res.status(404).send(error)
     }

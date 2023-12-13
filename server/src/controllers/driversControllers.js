@@ -1,5 +1,6 @@
 const { infoDrivers } = require("../functions/functions.index")
 const { Driver, Team } = require('../db')
+const { Op } = require('sequelize')
 
 const createDriverDB = async (id, name, surname, description, image, nationality, dob) => {
     return await Driver.create({ id, name, surname, description, image, nationality, dob })
@@ -21,8 +22,8 @@ const getDetailDriver = async (id, source) => {
 }
 
 const getNameDriver = async (name) => {
-    const driverFilterJson = ((await infoDrivers()).filter((driver) => driver.name === name))
-    const driverFilterDB = await Driver.findAll({ where: { name: name } })
+    const driverFilterJson = ((await infoDrivers()).filter((driver) => driver.name.toLowerCase().includes(name.toLowerCase())))
+    const driverFilterDB = await Driver.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } })
 
     return [...driverFilterJson, ...driverFilterDB]
 }

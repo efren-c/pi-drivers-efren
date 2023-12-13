@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-const filePath = path.join(__dirname, '..', '..', 'api', 'db.json');
-const rawData = fs.readFileSync(filePath);
-const driversData = JSON.parse(rawData).drivers;
+const filePath = path.join(__dirname, '..', '..', 'api', 'db.json')
+const rawData = fs.readFileSync(filePath)
+const driversData = JSON.parse(rawData).drivers
 
 const infoDrivers = async () => {
     const response = await Promise.all(driversData.map(driver => ({
@@ -18,4 +18,4 @@ const infoDrivers = async () => {
     return response
 }
 
-module.exports = { infoDrivers }
+module.exports = { infoDrivers, driversData }
