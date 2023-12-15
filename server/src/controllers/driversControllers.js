@@ -13,14 +13,16 @@ const getAllDrivers = async () => {
     return driversJson.concat(driversDB)
 }
 
-const getDetailDriver = async (id) => {
-    if (!isNaN(id)) {
-        console.log(driversData.id); //driversData trae toda la info | driversData.id undefined
-        return driversData.id
-    } else {
-        const driver = await Driver.findOne(id)
-        return driver
-    }
+const getDetailDriver = async (id, source) => {
+    const driver = source === "json"
+        ? driversData
+        : await Driver.findByPk(id, {
+            include: {
+                model: Team,
+                attributes: ["id", "name"]
+            }
+        })
+    return driver
 }
 
 const getNameDriver = async (name) => {
