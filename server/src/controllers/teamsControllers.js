@@ -8,20 +8,21 @@ const driversData = JSON.parse(rawData).drivers
 
 
 const getAllTeams = async () => {
-    const dbTeams = await Team.findAll()
+    let dbTeams = await Team.findAll()
 
-    if (dbTeams === 0) {
-        const teamsJson = await driversData
+    if (dbTeams.length === 0) {
+        const teamsJson = driversData
 
-        const allTeams = []
-        teamsJson.forEach((driver) => {
-            const team = driver.team
+        const allTeams = teamsJson.map((driver) => {
+            const team = driver.teams
 
             if (team) {
-                const splitTeams = team.split(", ")
-                allTeams.push(...splitTeams)
+                const splitTeams = team.split(",")
+                const cleanTeams = splitTeams.map(teamName => teamName.trim())
+                return cleanTeams
             }
         })
+            .flat()
 
         dbTeams = [...new Set(allTeams)]
 
@@ -30,6 +31,12 @@ const getAllTeams = async () => {
         })
     }
     return dbTeams
+}
+
+const postTeam = async (name) => {
+    const newTeam = await Team.create({ name })
+
+    return newTeam
 }
 
 module.exports = { getAllTeams }
