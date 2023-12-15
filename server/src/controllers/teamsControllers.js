@@ -27,7 +27,9 @@ const getAllTeams = async () => {
         dbTeams = [...new Set(allTeams)]
 
         dbTeams.forEach((name) => {
-            postTeam(name)
+            if (name !== null) {
+                postTeam(name)
+            }
         })
     }
     return dbTeams

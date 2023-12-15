@@ -1,10 +1,10 @@
-const { infoDrivers } = require("../functions/functions.index")
+const { infoDrivers, driversData } = require("../functions/functions.index")
 const { Driver, Team } = require('../db')
 const { Op } = require('sequelize')
 
-const createDriverDB = async (id, name, surname, description, image, nationality, dob) => {
+/* const createDriverDB = async (id, name, surname, description, image, nationality, dob) => {
     return await Driver.create({ id, name, surname, description, image, nationality, dob })
-}
+} */
 
 const getAllDrivers = async () => {
     const driversDB = await Driver.findAll()
@@ -13,12 +13,14 @@ const getAllDrivers = async () => {
     return driversJson.concat(driversDB)
 }
 
-const getDetailDriver = async (id, source) => {
-    const driver = source === "json"
-        ? infoDrivers
-        : await Driver.findByPk(id)
-
-    return driver
+const getDetailDriver = async (id) => {
+    if (!isNaN(id)) {
+        console.log(driversData.id); //driversData trae toda la info | driversData.id undefined
+        return driversData.id
+    } else {
+        const driver = await Driver.findOne(id)
+        return driver
+    }
 }
 
 const getNameDriver = async (name) => {
