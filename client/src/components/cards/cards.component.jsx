@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllDrivers } from '../../redux/actions'
 import Card from '../card/card.component'
+import './cards.styles.css'
 
+function Cards() {
+    const [drivers, setDrivers] = useState([])
+    const allDrivers = useSelector((state) => state.allDrivers)
+    const dispatch = useDispatch()
 
-export default function Cards(driver) {
+    useEffect(() => {
+        dispatch(getAllDrivers())
+    }, [dispatch])
+
+    const firstTenDrivers = allDrivers.slice(0, 10)
+
     return (
         <div>
-            {driver.map(
-                //<div> {driver.name} </div>
-                (driver, i) => <Card driver={driver} key={i} />
-            )}
+            <div className='cards-container'>
+                {firstTenDrivers.map((driver) => (
+                    <Card key={driver.id} driver={driver} />
+                ))}
+            </div>
         </div>
     )
 }
+
+export default Cards

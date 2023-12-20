@@ -1,6 +1,6 @@
 import { GET_ALL_DRIVERS, GET_DRIVERS_NAME, GET_TEAMS } from './actionTypes'
 import axios from 'axios'
-export const URL = 'http://localhost:3001/'
+export const URL = 'http://localhost:3001'
 
 export const getAllDrivers = () => {
     return async (dispatch) => {
@@ -12,7 +12,7 @@ export const getAllDrivers = () => {
     }
 }
 
-export const GET_DRIVERS_NAME = (name) => {
+export const getDriversByName = (name) => {
     return async (dispatch) => {
         const response = await axios(`${URL}/drivers?name=${name}`)
         return dispatch({
@@ -22,7 +22,7 @@ export const GET_DRIVERS_NAME = (name) => {
     }
 }
 
-export const GET_TEAMS = () => {
+export const getTeams = () => {
     return async (dispatch) => {
         const response = await axios(`${URL}/teams`)
         return dispatch({

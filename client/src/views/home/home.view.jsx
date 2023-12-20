@@ -2,6 +2,7 @@ import React from 'react'
 import Cards from '../../components/cards/cards.component'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
+import './home.styles.css'
 
 export default function Home() {
     const [drivers, setDrivers] = useState()
