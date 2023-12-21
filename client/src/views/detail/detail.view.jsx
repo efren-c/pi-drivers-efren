@@ -1,33 +1,32 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const Detail = () => {
-    const { id } = useParams();
-    const [driverDetail, setDriverDetail] = useState({});
-    const [loading, setLoading] = useState(true);
+    const { id } = useParams()
+    const [driverDetail, setDriverDetail] = useState({})
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getAxios = async () => {
             try {
-                const response = await axios('http://localhost:3001/drivers/${id}');
-                setDriverDetail(response.data);
+                const response = await axios('http://localhost:3001/drivers/${id}')
+                setDriverDetail(response.data)
             } catch (error) {
-                console.error("Error al obtener datos:", error);
+                console.error("Error al obtener datos:", error)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
-        };
+        }
 
-        getAxios();
-    }, [id]);
+        getAxios()
+    }, [id])
 
     useEffect(() => {
-        console.log("driverDetail:", driverDetail);
-    }, [driverDetail]);
+    }, [driverDetail])
 
     if (loading) {
-        return <p>Cargando...</p>;
+        return <p>Cargando...</p>
     }
 
     return (
@@ -44,7 +43,7 @@ const Detail = () => {
 
             <article>{driverDetail.description}</article>
         </div>
-    );
-};
+    )
+}
 
-export default Detail;
+export default Detail
