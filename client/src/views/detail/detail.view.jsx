@@ -1,6 +1,8 @@
+import React from "react"
+import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import axios from "axios"
+import './detail.styles.css'
 
 const Detail = () => {
     const { id } = useParams()
@@ -10,7 +12,7 @@ const Detail = () => {
     useEffect(() => {
         const getAxios = async () => {
             try {
-                const response = await axios('http://localhost:3001/drivers/${id}')
+                const response = await axios(`http://localhost:3001/drivers/${id}`)
                 setDriverDetail(response.data)
             } catch (error) {
                 console.error("Error al obtener datos:", error)
@@ -19,7 +21,7 @@ const Detail = () => {
             }
         }
 
-        getAxios()
+        return getAxios()
     }, [id])
 
     useEffect(() => {
@@ -31,16 +33,14 @@ const Detail = () => {
 
     return (
         <div className="content">
-            <h1>
-                {driverDetail.name.forename} {driverDetail.name.surname}
-            </h1>
+            <h2>{driverDetail.name.forename} {driverDetail.name.surname}</h2>
+            <h2> {driverDetail.team.name} </h2>
             <img
                 src={driverDetail.image.url}
                 width="600px"
                 height="auto"
                 alt="Cargando..."
             />
-
             <article>{driverDetail.description}</article>
         </div>
     )
