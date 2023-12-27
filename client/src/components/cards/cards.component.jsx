@@ -6,7 +6,7 @@ import "./cards.styles.css"
 
 function Cards() {
     const [currentPage, setCurrentPage] = useState(1)
-    const itemsPerPage = 15
+    const itemsPerPage = 9
     const allDrivers = useSelector((state) => state.allDrivers)
     const dispatch = useDispatch()
 

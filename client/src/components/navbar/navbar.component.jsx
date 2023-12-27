@@ -10,8 +10,8 @@ function Navbar() {
             <div className="navigation">
                 <button onClick={() => navigate("/drivers")}>All drivers</button>
                 <button>Teams</button>
-                <button>Form</button>
-                <button>About</button>
+                <button onClick={() => navigate("/form")}>Form</button>
+                <button onClick={() => navigate("/about")} >About</button>
             </div>
             <div className="searchbar">
                 <input type="text" name="" id="" placeholder=" Search a driver" />

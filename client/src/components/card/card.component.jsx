@@ -7,9 +7,7 @@ export default function Card(driver) {
         <Link to={`/drivers/${driver.driver.id}`} className='card'>
             <h2>{driver.driver.name}</h2>
             <div className="driver-image" style={{ backgroundImage: `url(${driver.driver.image})` }}></div>
-            <p> {driver.driver.dob} </p>
-            <p>Nationality: {driver.driver.nationality}</p>
-            {/* <button onClick={() => onclose(driver.driver.id)} >X</button> */}
+            <p>Teams: {driver.driver.teams}</p>
         </Link>
     )
 }

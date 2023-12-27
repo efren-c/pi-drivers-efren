@@ -34,13 +34,15 @@ const Detail = () => {
     return (
         <div className="content">
             <h2>{driverDetail.name.forename} {driverDetail.name.surname}</h2>
-            <h2> {driverDetail.team.name} </h2>
+            <p> {driverDetail.team.name} </p>
             <img
                 src={driverDetail.image.url}
                 width="600px"
                 height="auto"
                 alt="Cargando..."
             />
+            <p>Nationality: {driverDetail.nationality} </p>
+            <p>Date of birth: {driverDetail.dob} </p>
             <article>{driverDetail.description}</article>
         </div>
     )
